@@ -1,6 +1,18 @@
 <?php
     include('../inc/functions.php');
-    $departments = get_all_departments();
+
+    if (!isset($_GET["indice"])){
+        $departments = get_all_departments("ASC");
+        $ordre="croissant";
+      
+    }
+    else{
+        $departments = get_all_departments("DESC");
+        $ordre="decroissant";
+        $_GET["indice"]=0;
+
+    }
+  
 
 ?>		
 <html>
@@ -13,6 +25,17 @@
     <p><a href="stats.php">📊 Statistiques par emploi</a></p>
     <p><a href="dept_form.php">➕ Ajouter un département</a></p>
     <p><a href="emp_form.php">➕ Ajouter un employé</a></p>
+
+    <?php
+        if ($ordre=="croissant"){ ?>
+            <p><a href="index.php?indice=1">croissant</a></p>
+        <?php }
+
+        else {
+            ?> <p><a href="index.php">decroissant</a></p><?php
+        }
+    ?>
+    
  <table border="1">
     <tr>
         <th>Department Number</th>
@@ -31,6 +54,8 @@
         </tr>
     <?php } ?>
     </table>
+
+    
 
     </body>
 </html>
