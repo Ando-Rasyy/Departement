@@ -26,9 +26,9 @@ function get_one_line($sql){
     return $result;
 }
 
-function get_all_departments()
+function get_all_departments($ordre)
 {
-    $sql = "SELECT d.dept_no,
+    $sql = sprintf("SELECT d.dept_no,
                    d.dept_name,
                    CONCAT(e.first_name, ' ', e.last_name) AS manager_name,
                    (SELECT COUNT(*)
@@ -41,9 +41,11 @@ function get_all_departments()
                   AND dm.to_date = '9999-01-01'
             LEFT JOIN employees e
                    ON e.emp_no = dm.emp_no
-            ORDER BY d.dept_no";
+            ORDER BY d.dept_no %s",$ordre);
     return get_all_lines($sql);
 }
+
+
 
 function get_jobs_stats()
 {
