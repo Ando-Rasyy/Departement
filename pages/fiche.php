@@ -36,6 +36,7 @@
             <tr><th>N°</th>              <td><?= $employee['emp_no'] ?></td></tr>
             <tr><th>Prénom</th>          <td><?= $employee['first_name'] ?></td></tr>
             <tr><th>Nom</th>             <td><?= $employee['last_name'] ?></td></tr>
+            <tr><th>Numero telephone</th><td><?= $employee['num_phone'] ?></td></tr>
             <tr><th>Genre</th>           <td><?= $employee['gender'] ?></td></tr>
             <tr><th>Date de naissance</th><td><?= $employee['birth_date'] ?></td></tr>
             <tr><th>Date d'embauche</th> <td><?= $employee['hire_date'] ?></td></tr>

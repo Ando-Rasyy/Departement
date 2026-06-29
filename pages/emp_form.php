@@ -14,6 +14,7 @@
     $emp_no     = $emp_no_url;
     $first_name = $existing['first_name'] ?? '';
     $last_name  = $existing['last_name']  ?? '';
+    $num_phone  = $existing['num_phone']  ?? '';
     $gender     = $existing['gender']     ?? 'M';
     $birth_date = $existing['birth_date'] ?? '';
     $hire_date  = $existing['hire_date']  ?? '';
@@ -28,6 +29,7 @@
         $emp_no     = trim($_POST['emp_no'] ?? '');
         $first_name = trim($_POST['first_name'] ?? '');
         $last_name  = trim($_POST['last_name'] ?? '');
+        $num_phone  = trim($_POST['num_phone'] ?? '');
         $gender     = $_POST['gender'] ?? 'M';
         $birth_date = $_POST['birth_date'] ?? '';
         $hire_date  = $_POST['hire_date'] ?? '';
@@ -44,14 +46,14 @@
             $today = date('Y-m-d');
 
             if ($mode === 'edit') {
-                update_employee($emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date);
+                update_employee($emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date, $num_phone);
                 // Département : on ne change que s'il a été modifié (date d'effet = aujourd'hui)
                 $current = get_current_department($emp_no);
                 if (!$current || $current['dept_no'] !== $dept_no) {
                     change_department($emp_no, $dept_no, $today);
                 }
             } else {
-                add_employee($emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date);
+                add_employee($emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date, $num_phone);
                 // Nouveau salarié : on l'affecte à son département (date d'effet = date d'embauche)
                 change_department($emp_no, $dept_no, $hire_date);
             }
@@ -97,6 +99,7 @@
                 <option value="F" <?= $gender === 'F' ? 'selected' : '' ?>>F</option>
             </select>
         </p>
+        <p>Numero de telephone : <input type="text" name="num_phone" value="<?= htmlspecialchars($num_phone) ?>"></p>
         <p>Date de naissance : <input type="date" name="birth_date" value="<?= htmlspecialchars($birth_date) ?>"></p>
         <p>Date d'embauche : <input type="date" name="hire_date" value="<?= htmlspecialchars($hire_date) ?>"></p>
         <p>Département :

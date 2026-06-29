@@ -173,21 +173,21 @@ function update_department($dept_no, $dept_name)
     execute_query($sql);
 }
 
-function add_employee($emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date)
+function add_employee($emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date, $num_phone)
 {
-    $sql = "INSERT INTO employees (emp_no, birth_date, first_name, last_name, gender, hire_date)
-            VALUES ('%s', '%s', '%s', '%s', '%s', '%s')";
-    $sql = sprintf($sql, $emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date);
+    $sql = "INSERT INTO employees (emp_no, birth_date, first_name, last_name, gender, hire_date, num_phone)
+            VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')";
+    $sql = sprintf($sql, $emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date, $num_phone);
     execute_query($sql);
 }
 
-function update_employee($emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date)
+function update_employee($emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date, $num_phone)
 {
     $sql = "UPDATE employees
             SET birth_date = '%s', first_name = '%s', last_name = '%s',
-                gender = '%s', hire_date = '%s'
+                gender = '%s', hire_date = '%s', num_phone = '%s'
             WHERE emp_no = '%s'";
-    $sql = sprintf($sql, $birth_date, $first_name, $last_name, $gender, $hire_date, $emp_no);
+    $sql = sprintf($sql, $birth_date, $first_name, $last_name, $gender, $hire_date, $num_phone, $emp_no);
     execute_query($sql);
 }
 
@@ -248,6 +248,7 @@ function get_one_employee($emp_no)
     $sql = "SELECT e.emp_no,
                    e.first_name,
                    e.last_name,
+                   e.num_phone,
                    e.gender,
                    e.birth_date,
                    e.hire_date,
