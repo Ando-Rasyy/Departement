@@ -18,15 +18,42 @@
             <th>Total</th>
             <th>Salaire moyen</th>
         </tr>
-        <?php foreach ($stats as $row) { ?>
-            <tr>
-                <td><?= $row['title'] ?></td>
-                <td><?= $row['nb_hommes'] ?></td>
-                <td><?= $row['nb_femmes'] ?></td>
-                <td><?= $row['nb_total'] ?></td>
-                <td><?= number_format($row['salaire_moyen'], 0, ',', ' ') ?> €</td>
-            </tr>
-        <?php } ?>
+        <?php
+            // moyenne general
+            $m=0;
+            for ($j=0; $j < count($stats); $j++) { 
+            $m=$m+$stats[$j]['salaire_moyen'];
+            }
+            $moygen=$m/count($stats);
+
+            // ******
+            
+            
+            $css="ftfyt";
+            foreach ($stats as $row) { ?>
+                <tr>
+                    <td><?= $row['title'] ?></td>
+                    <td><?= $row['nb_hommes'] ?></td>
+                    <td><?= $row['nb_femmes'] ?></td>
+                    <td><?= $row['nb_total'] ?></td> 
+
+                    <?php if ($row['salaire_moyen']>=$moygen) { 
+                       $color="red";
+                    } 
+                    else {
+                       $color="green";
+                    }
+                    ?>
+                    <td  style="background-color: <?php echo  $color ?>;"><?= number_format($row['salaire_moyen'], 0, ',', ' ') ?> €</td>
+                    
+                    
+                </tr><?php }?>
+    
+
+
+        
+
+
     </table>
     </body>
 </html>
